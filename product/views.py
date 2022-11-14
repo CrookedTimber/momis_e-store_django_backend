@@ -11,8 +11,14 @@ from .serializers import ProductSerializer, CategorySerializer
 
 class LatestProductsList(APIView):
     def get(self, request, format=None):
-        products = Product.objects.all()[0:4]
+        products = Product.objects.all()[0:8]
         serializer = ProductSerializer(products, many=True)
+        return Response(serializer.data)
+    
+class AllCategories(APIView):
+    def get(self, request, format=None):
+        categories = Category.objects.all()
+        serializer = CategorySerializer(categories, many=True)
         return Response(serializer.data)
 
 
